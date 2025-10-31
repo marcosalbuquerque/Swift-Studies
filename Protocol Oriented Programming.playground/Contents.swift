@@ -45,3 +45,15 @@ extension String {
 let manoel = "Manoel"
 
 print(manoel.isManoel) // verdadeiro
+
+
+class PersonObject {
+    var id: Int
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+        self.id = 0
+    }
+}
+
