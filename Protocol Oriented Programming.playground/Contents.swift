@@ -57,3 +57,39 @@ class PersonObject {
     }
 }
 
+// associed types
+
+protocol Container {
+    associatedtype Item // tipo associado
+    
+    mutating func adicionar (_ item: Item)
+    func obterItem (em index: Int) -> Item?
+}
+
+struct CaixaDeItens<T>: Container {
+    typealias Item = T
+    private var itens: [T] = []
+    
+    mutating func adicionar(_ item: T) {
+        itens.append(item)
+    }
+    
+    func obterItem(em index: Int) -> T? {
+        guard itens.indices.contains(index) else { return nil }
+       return itens[index]
+    }
+}
+
+var caixaInt = CaixaDeItens<Int>()
+caixaInt.adicionar(10)
+caixaInt.adicionar(20)
+if let item = caixaInt.obterItem(em: 0) {
+    print("Item na posição 0: \(item)") // Item na posição 0: 10
+}
+
+var caixaString = CaixaDeItens<String>()
+caixaString.adicionar("Olá")
+caixaString.adicionar("Mundo")
+if let item = caixaString.obterItem(em: 1) {
+    print("Item na posição 1: \(item)") // Item na posição 1: Mundo
+}
